@@ -60,6 +60,9 @@
 <script>
   window.addEventListener("keydown", function(e){
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const effect = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    effect.classList.add("playing");
+    // setTimeout(look.classList.remove("playing"),1000);
     audio.play();
   })
 </script>
