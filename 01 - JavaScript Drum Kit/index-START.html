@@ -59,10 +59,10 @@
 
 <script>
   const addEffect = (key, audio) => {
-    console.log(key);
+    // console.log(key);
     key.classList.add("playing");
     // set currentTime to 0 everytime key is pressed so audio will be played even before the last audio is finised.
-    audio.currentTime = 0;
+    audio.currentTime = 0; // to rewind to the start every time press the key
     audio.play();
   };
 
@@ -71,8 +71,16 @@
     const oldKey = document.querySelector(`div[data-key="${e.keyCode}"]`);
     addEffect(oldKey, audio);
     const newKey = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    setTimeout(newKey.classList.remove("playing"),1000);
-  })
+    // setTimeout(newKey.classList.remove("playing"),1000); // setTimeOut won't work because classList
+  });
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(function(key){
+    key.addEventListener("transitionend", function(e){
+      console.log(e);
+      e.target.classList.remove("playing");
+    })
+  });
 </script>
 
 
