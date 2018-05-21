@@ -62,13 +62,38 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+
+    .clock .hour-hand {
+      height: 7px;
     }
 
   </style>
 
   <script>
-
-
+    var second;
+    var min;
+    var hr;
+    const updateTime = () => {
+      var time = new Date();
+      second = time.getSeconds();
+      min = time.getMinutes();
+      hr = time.getHours();
+      if (hr >= 12) {
+        hr -= 12;
+      };
+      console.log(second,min,hr);
+      const hrHand = document.querySelector('.hour-hand');
+      const minHand = document.querySelector('.min-hand');
+      const secHand = document.querySelector('.second-hand');
+      hrHand.style.transform = `rotate(${hr*360/12+90}deg)`;
+      secHand.style.transform = `rotate(${second*360/60+90}deg)`;
+      minHand.style.transform = `rotate(${min*360/60+90}deg)`;
+    };
+    setInterval(updateTime, 1000);
   </script>
 </body>
 </html>
